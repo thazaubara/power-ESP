@@ -7,9 +7,9 @@ Simple ESP microcontroller that publishes power consumption to local MQTT. Inclu
 
 
 
-![powerMCU v9 full](assets/powerMCU v9 full.png)
+<img src="assets/powerMCU v9 full.png" alt="powerMCU v9 full" />
 
-![powerMCU v9 naked](assets/powerMCU v9 naked.png)
+<img src="assets/powerMCU v9 naked.png" alt="powerMCU v9 naked" />
 
 
 
