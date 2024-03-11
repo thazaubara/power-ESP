@@ -83,8 +83,6 @@ void reconnect() {
 	}
 }
 
-
-
 void readTrueWatt(int channel){
   int millis = 500;
   Serial.println("----- MEASURING CHANNEL " + String(channel) + " -----");
@@ -295,14 +293,10 @@ void loop()
 		reconnect();
 	}
 
-
-  
   // MQTT STUFF
-  client.loop();
- 
+  client.loop(); 
   sendAlive();
 
-  
   readTrueWatt(0);
   digitalWrite(LED_BUILTIN, LOW);
   publish("homesens/power/sum_watt", String(final_watt[0] + final_watt[1] + final_watt[2],0));
@@ -330,10 +324,7 @@ void loop()
   printlcd("[" + String(final_watt[0] + final_watt[1] + final_watt[2],0) + "] " + String(final_watt[2],0) + " " + String(final_watt[1],0) + " " + String(final_watt[0],0));
   digitalWrite(LED_BUILTIN, HIGH);
 
-
-
   // FINISH
-
 }
 
 
