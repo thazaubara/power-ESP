@@ -12,9 +12,9 @@ ADS1115_lite adc(ADS1115_DEFAULT_ADDRESS);
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-const char* SSID = "MartinRouterPing";
-const char* PSK = "_1HaveAStream";
-const char* MQTT_BROKER = "192.168.0.3";
+const char* SSID = "";
+const char* PSK = "";
+const char* MQTT_BROKER = "";
 const int PORT = 1883;
 const int DELAY = 2000;
 char msg[50];
