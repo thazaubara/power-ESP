@@ -57,7 +57,6 @@ void setup_wifi() {
 	Serial.println();
 	Serial.print("Connecting to ");
 	Serial.println(SSID);
-
 	WiFi.begin(SSID, PSK);
 
 	while (WiFi.status() != WL_CONNECTED) {
@@ -74,7 +73,7 @@ void setup_wifi() {
 void reconnect() {
 	while (!client.connected()) {
 		Serial.print("Reconnecting...");
-		if (!client.connect("ESP8266Client")) {
+		if (!client.connect("ESP8266_PowerESP")) {
 			Serial.print("failed, rc=");
 			Serial.print(client.state());
 			Serial.println(" retrying in 5 seconds");
@@ -268,19 +267,19 @@ void sendAlive(){
   snprintf (msg, 50, "Alive since %ld milliseconds", millis());
   //Serial.print("Publish message: ");
   Serial.println(msg);
-  client.publish("homesens/power/message", msg);
+  client.publish("homesens/ESP32/power/message", msg);
 
   // SEND IP ADDRESS
   char bufIp [20];
   IPAddress ipaddr = WiFi.localIP();
   sprintf(bufIp, "%d.%d.%d.%d", ipaddr[0], ipaddr[1], ipaddr[2], ipaddr[3]);
-  client.publish("homesens/power/ip", bufIp);
+  client.publish("homesens/ESP32/power/ip", bufIp);
 
   // SEND MAC ADDRESS
   String mac = String(WiFi.macAddress());
   char bufMac [20];
   mac.toCharArray(bufMac, 20);
-  client.publish("homesens/power/mac", bufMac);
+  client.publish("homesens/ESP32/power/mac", bufMac);
 
   digitalWrite(LED_BUILTIN, HIGH);
 }
@@ -299,28 +298,28 @@ void loop()
 
   readTrueWatt(0);
   digitalWrite(LED_BUILTIN, LOW);
-  publish("homesens/power/sum_watt", String(final_watt[0] + final_watt[1] + final_watt[2],0));
-  publish("homesens/power/L1_watt", String(final_watt[0],0));
-  publish("homesens/power/L1_amp", String(final_amps[0],2));
-  publish("homesens/power/L1_sensor_mV", String(final_mv[0],3));
+  publish("homesens/ESP32/power/sum_watt", String(final_watt[0] + final_watt[1] + final_watt[2],0));
+  publish("homesens/ESP32/power/L1_watt", String(final_watt[0],0));
+  publish("homesens/ESP32/power/L1_amp", String(final_amps[0],2));
+  publish("homesens/ESP32/power/L1_sensor_mV", String(final_mv[0],3));
   printlcd("[" + String(final_watt[0] + final_watt[1] + final_watt[2],0) + "] " + String(final_watt[2],0) + " " + String(final_watt[1],0) + " " + String(final_watt[0],0));
   digitalWrite(LED_BUILTIN, HIGH);
 
   readTrueWatt(1);
   digitalWrite(LED_BUILTIN, LOW);
-  publish("homesens/power/sum_watt", String(final_watt[0] + final_watt[1] + final_watt[2],0));
-  publish("homesens/power/L2_watt", String(final_watt[1],0));
-  publish("homesens/power/L2_amp", String(final_amps[1],2));
-  publish("homesens/power/L2_sensor_mV", String(final_mv[1],3));
+  publish("homesens/ESP32/power/sum_watt", String(final_watt[0] + final_watt[1] + final_watt[2],0));
+  publish("homesens/ESP32/power/L2_watt", String(final_watt[1],0));
+  publish("homesens/ESP32/power/L2_amp", String(final_amps[1],2));
+  publish("homesens/ESP32/power/L2_sensor_mV", String(final_mv[1],3));
   printlcd("[" + String(final_watt[0] + final_watt[1] + final_watt[2],0) + "] " + String(final_watt[2],0) + " " + String(final_watt[1],0) + " " + String(final_watt[0],0));
   digitalWrite(LED_BUILTIN, HIGH);
   
   readTrueWatt(2);
   digitalWrite(LED_BUILTIN, LOW);
-  publish("homesens/power/sum_watt", String(final_watt[0] + final_watt[1] + final_watt[2],0));
-  publish("homesens/power/L3_watt", String(final_watt[2],0));
-  publish("homesens/power/L3_amp", String(final_amps[2],2));
-  publish("homesens/power/L3_sensor_mV", String(final_mv[2],3));
+  publish("homesens/ESP32/power/sum_watt", String(final_watt[0] + final_watt[1] + final_watt[2],0));
+  publish("homesens/ESP32/power/L3_watt", String(final_watt[2],0));
+  publish("homesens/ESP32/power/L3_amp", String(final_amps[2],2));
+  publish("homesens/ESP32/power/L3_sensor_mV", String(final_mv[2],3));
   printlcd("[" + String(final_watt[0] + final_watt[1] + final_watt[2],0) + "] " + String(final_watt[2],0) + " " + String(final_watt[1],0) + " " + String(final_watt[0],0));
   digitalWrite(LED_BUILTIN, HIGH);
 
